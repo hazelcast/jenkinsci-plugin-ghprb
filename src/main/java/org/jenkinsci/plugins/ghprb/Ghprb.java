@@ -658,4 +658,8 @@ public class Ghprb {
         }
         return toReturn;
     }
+
+    public boolean isTestingPhraseCommentAllowed() {
+        return !trigger.getDontCommentTestingPhrase();
+    }
 }

@@ -42,6 +42,9 @@ f.advanced() {
   f.entry(field: "whiteListLabels", title: _("List of GitHub labels for which the build should only be triggered. (Leave blank for 'any')")) {
     f.textarea()
   }
+  f.entry(field: "dontCommentTestingPhrase", title: "Don't comment on PR when testing phrase is required") {
+    f.checkbox() 
+  }
   f.entry(field: "allowMembersOfWhitelistedOrgsAsAdmin", title: "Allow members of whitelisted organizations as admins") {
     f.checkbox() 
   }

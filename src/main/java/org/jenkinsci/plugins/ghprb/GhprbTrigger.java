@@ -136,6 +136,7 @@ public class GhprbTrigger extends GhprbTriggerBackwardsCompatible {
 
     private String excludedRegions;
 
+    private final Boolean dontCommentTestingPhrase;
 
     private transient Ghprb helper;
 
@@ -199,7 +200,8 @@ public class GhprbTrigger extends GhprbTriggerBackwardsCompatible {
                         String whiteListLabels,
                         List<GhprbExtension> extensions,
                         String includedRegions,
-                        String excludedRegions
+                        String excludedRegions,
+                        Boolean dontCommentTestingPhrase
     ) throws ANTLRException {
         super(cron);
         this.adminlist = adminlist;
@@ -223,6 +225,7 @@ public class GhprbTrigger extends GhprbTriggerBackwardsCompatible {
         this.whiteListLabels = whiteListLabels;
         this.includedRegions = includedRegions;
         this.excludedRegions = excludedRegions;
+        this.dontCommentTestingPhrase = dontCommentTestingPhrase;
         setExtensions(extensions);
         configVersion = LATEST_VERSION;
     }
@@ -630,6 +633,10 @@ public class GhprbTrigger extends GhprbTriggerBackwardsCompatible {
             return (displayErrors != null && displayErrors);
         }
         return displayBuildErrorsOnDownstreamBuilds;
+    }
+
+    public boolean getDontCommentTestingPhrase() {
+        return dontCommentTestingPhrase != null && dontCommentTestingPhrase;
     }
 
     private List<GhprbBranch> normalizeTargetBranches(List<GhprbBranch> branches) {

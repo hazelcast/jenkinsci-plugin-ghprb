@@ -167,7 +167,7 @@ public class GhprbPullRequest {
             LOGGER.log(Level.INFO,
                     "Author of #{0} {1} on {2} not in whitelist!",
                     new Object[] {id, author.getLogin(), reponame});
-            if (!containsComment(pr, getRequestForTestingPhrase())) {
+            if (ghprb.isTestingPhraseCommentAllowed() && !containsComment(pr, getRequestForTestingPhrase())) {
                 repo.addComment(id, GhprbTrigger.getDscp().getRequestForTestingPhrase());
             }
         }

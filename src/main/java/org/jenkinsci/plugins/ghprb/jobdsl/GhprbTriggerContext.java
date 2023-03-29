@@ -50,6 +50,8 @@ class GhprbTriggerContext implements Context {
 
     GhprbExtensionContext extensionContext = new GhprbExtensionContext();
 
+    boolean dontCommentTestingPhrase;
+
     /**
      * Adds admins for this job.
      */
@@ -313,6 +315,15 @@ class GhprbTriggerContext implements Context {
             excludedRegionsStr += (region + "\n");
         }
         excludedRegions(excludedRegionsStr);
+    }
+
+    public void dontCommentTestingPhrase(boolean dontCommentTestingPhrase) {
+        this.dontCommentTestingPhrase = dontCommentTestingPhrase;
+    }
+
+
+    public void dontCommentTestingPhrase() {
+        dontCommentTestingPhrase(true);
     }
 
 }
