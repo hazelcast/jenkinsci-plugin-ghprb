@@ -75,11 +75,10 @@
     <!--   <property name="fileExtensions" value="java"/> -->
     <!-- </module> -->
 
-    <module name="SuppressionCommentFilter"/>
 
     <module name="TreeWalker">
 
-        <module name="FileContentsHolder"/>
+        <module name="SuppressionCommentFilter"/>
 
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
@@ -114,11 +113,6 @@
             <property name="processJavadoc" value="false"/>
         </module>
 
-        <!-- Checks for Size Violations.                    -->
-        <!-- See http://checkstyle.sf.net/config_sizes.html -->
-        <module name="LineLength">
-            <property name="max" value="140" />
-        </module>
         <module name="MethodLength"/>
 
         <!-- Checks for whitespace                               -->
@@ -176,6 +170,10 @@
         <module name="TodoComment"/>
         <module name="UpperEll"/>
 
+    </module>
+
+    <module name="LineLength">
+        <property name="max" value="140" />
     </module>
 
 </module>

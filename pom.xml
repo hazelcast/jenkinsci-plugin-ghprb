@@ -16,13 +16,14 @@
 
     <url>https://github.com/hazelcast/jenkinsci-plugin-ghprb</url>
 
-    <!--
-      The developers show up as current maintainers in the Jenkins wiki.
-      https://wiki.jenkins.io/display/JENKINS/GitHub+pull+request+builder+plugin
-
-      The id should be the jenkins.io username and not your GitHub username.
-    -->
     <developers>
+        <developer>
+            <id>hazelcast-team</id>
+            <name>Hazelcast team</name>
+            <email>info@hazelcast.com</email>
+            <organization>Hazelcast, Inc.</organization>
+            <organizationUrl>https://hazelcast.com</organizationUrl>
+        </developer>
         <developer>
             <id>sag47</id>
             <name>Sam Gleske</name>
@@ -51,8 +52,8 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
         <findbugs.failOnError>false</findbugs.failOnError>
-        <checkstyle.version>6.7</checkstyle.version>
-        <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
+        <checkstyle.version>9.3</checkstyle.version>
+        <checkstyle.plugin.version>3.2.1</checkstyle.plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -73,8 +74,6 @@
           <groupId>commons-codec</groupId>
           <artifactId>commons-codec</artifactId>
         </dependency>
-        <!-- end added dependencies because of maven enforcer plugin -->
-
         <dependency>
             <groupId>com.coravy.hudson.plugins.github</groupId>
             <artifactId>github</artifactId>
@@ -156,42 +155,9 @@
 
     <build>
         <plugins>
-<!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.16</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.surefire</groupId>
-                        <artifactId>surefire-junit47</artifactId>
-                        <version>2.16</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <includes>
-                        <include>**/*IT.java</include>
-                    </includes>
-                </configuration>
-            </plugin>
--->
             <plugin>
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
-                    <!-- During release:perform, enable the "release" profile -->
                     <releaseProfiles>release</releaseProfiles>
                 </configuration>
                 <dependencies>
