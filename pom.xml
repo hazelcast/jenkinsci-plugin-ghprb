@@ -11,7 +11,7 @@
     <groupId>com.hazelcast.jenkins.plugins</groupId>
     <artifactId>ghprb</artifactId>
     <name>GitHub Pull Request Builder</name>
-    <version>1.42.3-SNAPSHOT</version>
+    <version>5.0.0</version>
     <packaging>hpi</packaging>
 
     <url>https://github.com/hazelcast/jenkinsci-plugin-ghprb</url>
