@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>3.2</version>
+        <version>4.41</version>
     </parent>
 
     <groupId>com.hazelcast.jenkins.plugins</groupId>
@@ -14,7 +14,7 @@
     <version>1.42.3-SNAPSHOT</version>
     <packaging>hpi</packaging>
 
-    <url>https://github.com/jenkinsci/ghprb-plugin</url>
+    <url>https://github.com/hazelcast/jenkinsci-plugin-ghprb</url>
 
     <!--
       The developers show up as current maintainers in the Jenkins wiki.
@@ -36,81 +36,43 @@
     </developers>
 
     <scm>
-        <connection>scm:git:ssh://github.com/jenkinsci/ghprb-plugin.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/jenkinsci/ghprb-plugin.git</developerConnection>
-        <url>https://github.com/jenkinsci/ghprb-plugin</url>
+        <connection>scm:git:ssh://github.com/hazelcast/jenkinsci-plugin-ghprb.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/hazelcast/jenkinsci-plugin-ghprb.git</developerConnection>
+        <url>https://github.com/hazelcast/jenkinsci-plugin-ghprb</url>
         <tag>HEAD</tag>
     </scm>
 
-    <issueManagement>
-        <system>GitHub</system>
-        <url>https://github.com/janinko/ghprb/issues</url>
-    </issueManagement>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <workflow.version>1.4</workflow.version>
-        <jenkins.version>2.7</jenkins.version>
+        <jenkins.version>2.263.1</jenkins.version>
         <powermock.version>1.6.2</powermock.version>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
-        <java.level>8</java.level>
         <findbugs.failOnError>false</findbugs.failOnError>
         <checkstyle.version>6.7</checkstyle.version>
         <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <!-- Pick up common dependencies for the selected LTS line: https://github.com/jenkinsci/bom#usage -->
+                <groupId>io.jenkins.tools.bom</groupId>
+                <artifactId>bom-2.263.x</artifactId>
+                <version>984.vb5eaac999a7e</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
-
-        <!-- added dependencies because of maven enforcer plugin -->
-
         <dependency>
-            <groupId>org.jenkins-ci.plugins</groupId>
-            <artifactId>scm-api</artifactId>
-            <version>2.1.0</version>
+          <groupId>commons-codec</groupId>
+          <artifactId>commons-codec</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.jenkins-ci</groupId>
-            <artifactId>symbol-annotation</artifactId>
-            <version>1.9</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jenkins-ci</groupId>
-            <artifactId>annotation-indexer</artifactId>
-            <version>1.12</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jenkins-ci.plugins</groupId>
-            <artifactId>script-security</artifactId>
-            <version>1.25</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>2.4.11</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.ant</groupId>
-            <artifactId>ant</artifactId>
-            <version>1.9.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-utils</artifactId>
-            <version>3.0.10</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-classworlds</artifactId>
-            <version>2.4.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jenkins-ci.plugins</groupId>
-            <artifactId>bouncycastle-api</artifactId>
-            <version>2.16.1</version>
-        </dependency>
-
         <!-- end added dependencies because of maven enforcer plugin -->
 
         <dependency>
@@ -121,7 +83,6 @@
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>matrix-project</artifactId>
-            <version>1.11</version>
         </dependency>
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
@@ -131,7 +92,6 @@
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>git</artifactId>
-            <version>3.3.1</version>
         </dependency>
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
@@ -142,7 +102,6 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -172,7 +131,6 @@
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>token-macro</artifactId>
-            <version>2.1</version>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -184,22 +142,21 @@
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>credentials</artifactId>
-            <version>2.1.14</version>
         </dependency>
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>plain-credentials</artifactId>
-            <version>1.4</version>
         </dependency>
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>structs</artifactId>
-            <version>1.9</version>
         </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
+<!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -216,7 +173,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.16</version>
                 <executions>
                     <execution>
                         <goals>
@@ -231,9 +187,9 @@
                     </includes>
                 </configuration>
             </plugin>
+-->
             <plugin>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.5</version>
                 <configuration>
                     <!-- During release:perform, enable the "release" profile -->
                     <releaseProfiles>release</releaseProfiles>
@@ -246,15 +202,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
-            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>

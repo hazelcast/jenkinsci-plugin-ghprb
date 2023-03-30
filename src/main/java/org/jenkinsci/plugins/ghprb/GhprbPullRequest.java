@@ -83,7 +83,7 @@ public class GhprbPullRequest {
 
     private transient String commentBody;
 
-    private transient boolean shouldRun = false; // Declares if we should run the build this time.
+    private transient volatile boolean shouldRun = false; // Declares if we should run the build this time.
 
     private transient boolean triggered = false; // Only lets us know if the trigger phrase was used for this run
 
@@ -103,7 +103,7 @@ public class GhprbPullRequest {
 
     private final int id;
 
-    private Date updated; // Needed to track when the PR was updated
+    private volatile Date updated; // Needed to track when the PR was updated
 
     private String head;
 

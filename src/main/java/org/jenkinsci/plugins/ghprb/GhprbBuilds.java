@@ -7,6 +7,7 @@ import hudson.model.Result;
 import hudson.model.Run;
 import hudson.model.TaskListener;
 import hudson.model.queue.QueueTaskFuture;
+import hudson.plugins.git.Revision;
 import hudson.plugins.git.util.BuildData;
 import org.apache.commons.lang.StringUtils;
 import org.jenkinsci.plugins.ghprb.extensions.GhprbBuildStep;
@@ -186,7 +187,11 @@ public class GhprbBuilds {
         // having two of them, and because the one we added isn't correct
         // @see GhprbTrigger
         for (BuildData data : build.getActions(BuildData.class)) {
-            if (data.getLastBuiltRevision() != null && !data.getLastBuiltRevision().getSha1String().equals(c.getCommit())) {
+            Revision lastBuiltRevision = data.getLastBuiltRevision();
+            if (lastBuiltRevision == null || lastBuiltRevision.getSha1String() == null) {
+                continue;
+            }
+            if (!lastBuiltRevision.getSha1String().equals(c.getCommit())) {
                 build.getActions().remove(data);
                 break;
             }

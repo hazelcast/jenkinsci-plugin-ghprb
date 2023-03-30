@@ -47,6 +47,9 @@ import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 
 import javax.servlet.ServletException;
+
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -252,7 +255,7 @@ public class GhprbTrigger extends GhprbTriggerBackwardsCompatible {
     @SuppressWarnings("deprecation")
     private void initState() throws IOException {
 
-        final GithubProjectProperty ghpp = super.job.getProperty(GithubProjectProperty.class);
+        final GithubProjectProperty ghpp = requireNonNull(job).getProperty(GithubProjectProperty.class);
         if (ghpp == null || ghpp.getProjectUrl() == null) {
             throw new IllegalStateException("A GitHub project url is required.");
         }
@@ -370,7 +373,8 @@ public class GhprbTrigger extends GhprbTriggerBackwardsCompatible {
             return;
         }
 
-        LOGGER.log(Level.FINE, "Running trigger for {0}", super.job.getFullName());
+        String fullName = job != null ? job.getFullName() : "";
+        LOGGER.log(Level.FINE, "Running trigger for {0}", fullName);
 
         this.repository.check();
     }
@@ -484,7 +488,7 @@ public class GhprbTrigger extends GhprbTriggerBackwardsCompatible {
 
     private ArrayList<ParameterValue> getDefaultParameters() {
         ArrayList<ParameterValue> values = new ArrayList<ParameterValue>();
-        ParametersDefinitionProperty pdp = this.job.getProperty(ParametersDefinitionProperty.class);
+        ParametersDefinitionProperty pdp = requireNonNull(job).getProperty(ParametersDefinitionProperty.class);
         if (pdp != null) {
             for (ParameterDefinition pd : pdp.getParameterDefinitions()) {
                 values.add(pd.getDefaultParameterValue());
@@ -524,7 +528,7 @@ public class GhprbTrigger extends GhprbTriggerBackwardsCompatible {
     public void addWhitelist(String author) {
         whitelist = whitelist + " " + author;
         try {
-            this.job.save();
+            requireNonNull(job).save();
         } catch (IOException ex) {
             LOGGER.log(Level.SEVERE, "Failed to save new whitelist", ex);
         }

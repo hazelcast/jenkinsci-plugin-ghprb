@@ -1,0 +1,4 @@
+<?jelly escape-by-default='true'?>
+<div>
+  Builds pull requests from GitHub and will report the results directly to the pull request via the GitHub Commit Status API
+</div>

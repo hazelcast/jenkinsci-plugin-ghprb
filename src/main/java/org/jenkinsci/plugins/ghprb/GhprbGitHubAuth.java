@@ -39,6 +39,7 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -152,7 +153,7 @@ public class GhprbGitHubAuth extends AbstractDescribableImpl<GhprbGitHubAuth> {
                             new Object[] {localSignature, expected});
                     return false;
                 }
-            } catch (Exception e) {
+            } catch (RuntimeException | GeneralSecurityException | IOException e) {
                 LOGGER.log(Level.SEVERE, "Couldn't match both signatures");
                 return false;
             }

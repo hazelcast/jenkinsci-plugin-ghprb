@@ -86,9 +86,10 @@ public abstract class GhprbBaseBuildManager implements GhprbBuildManager {
 
         StringBuilder sb = new StringBuilder();
 
-        if (build.getResult() != Result.UNSTABLE) {
+        Result buildResult = build.getResult();
+        if (buildResult != null && buildResult != Result.UNSTABLE) {
             sb.append("<h2>Build result: ");
-            sb.append(build.getResult().toString());
+            sb.append(buildResult.toString());
             sb.append("</span></h2>");
 
             try {

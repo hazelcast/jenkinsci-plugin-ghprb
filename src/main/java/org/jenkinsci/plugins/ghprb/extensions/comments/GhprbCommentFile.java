@@ -44,15 +44,16 @@ public class GhprbCommentFile extends GhprbExtension implements GhprbCommentAppe
                 String content = null;
                 if (build instanceof Build<?, ?>) {
                     final FilePath workspace = ((Build<?, ?>) build).getWorkspace();
-                    final FilePath path = workspace.child(scriptFilePathResolved);
+                    final FilePath path = workspace == null ? null : workspace.child(scriptFilePathResolved);
 
-                    if (path.exists()) {
-                        content = path.readToString();
-                    } else {
-                        listener.getLogger().println(
-                            "Didn't find comment file in workspace at " + path.absolutize().getRemote()
-                            + ", falling back to file operations on master."
-                        );
+                    if (path != null) {
+                        if (path.exists()) {
+                            content = path.readToString();
+                        } else {
+                            listener.getLogger().println("Didn't find comment file in workspace at "
+                                    + path.absolutize().getRemote()
+                                    + ", falling back to file operations on master.");
+                        }
                     }
                 }
 
