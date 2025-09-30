@@ -18,8 +18,9 @@
 
     <licenses>
         <license>
-            <name>The Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <name>MIT license</name>
+            <url>https://github.com/hazelcast/jenkinsci-plugin-ghprb/blob/hazelcast-patches/LICENSE</url>
+            <distribution>repo</distribution>
         </license>
     </licenses>
 
